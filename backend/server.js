@@ -161,7 +161,8 @@ app.get('*', (req, res) => {
 // START
 // ============================================
 
-const PORT = process.env.PORT || 3001
-app.listen(PORT, () => {
-  console.log(`AniMarket API corriendo en http://localhost:${PORT}`)
+const PORT = process.env.PORT || 10000
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`AniMarket API corriendo en el puerto ${PORT}`)
 })
