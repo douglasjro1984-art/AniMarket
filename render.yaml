@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: amarket
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install && cd ../ecommerce-app && npm install && npm run build
+    startCommand: node server.js
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: amarket-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: amarket-db
+          property: port
+      - key: DB_USER
+        fromDatabase:
+          name: amarket-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: amarket-db
+          property: password
+      - key: DB_NAME
+        fromDatabase:
+          name: amarket-db
+          property: database
+      - key: DB_SSL
+        value: "true"
+
+databases:
+  - name: amarket-db
+    plan: free
+    databaseName: amarket_db
