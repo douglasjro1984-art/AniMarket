@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from './components/Navbar.jsx'
+import OffersTicker from './components/OffersTicker.jsx'
 import ProductGrid from './components/ProductGrid.jsx'
 import CartSidebar from './components/CartSidebar.jsx'
 import AdminForm from './components/AdminForm.jsx'
@@ -60,6 +61,8 @@ export default function App() {
   return (
     <div className="min-h-screen bg-canvas font-body text-ink">
       <Navbar view={view} onChangeView={setView} onOpenCart={() => setCartOpen(true)} />
+
+      {view === 'tienda' && <OffersTicker products={products} />}
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         {view === 'tienda' ? (
