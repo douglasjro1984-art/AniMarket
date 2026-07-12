@@ -6,7 +6,17 @@ export default function OffersTicker({ products }) {
 
   if (disponibles.length === 0) return null
 
-  const items = [...disponibles, ...disponibles]
+  const renderItems = (keyPrefix) =>
+    disponibles.map((p, i) => (
+      <span key={`${keyPrefix}-${p.id}-${i}`} className="inline-flex items-center gap-4 mx-8 flex-shrink-0">
+        <img src={p.imagenes?.[0] || p.imagen} alt="" className="w-14 h-14 rounded-xl object-cover border-2 border-white/40 shadow-lg flex-shrink-0" />
+        <div className="flex flex-col">
+          <span className="text-white text-base font-bold leading-tight">{p.nombre}</span>
+          <span className="text-white/80 text-sm font-bold">${p.precio.toLocaleString('es-AR')}</span>
+        </div>
+        <span className="text-white/30 text-2xl mx-3">•</span>
+      </span>
+    ))
 
   return (
     <div className="w-full overflow-hidden" style={{ background: 'linear-gradient(90deg, #D946A8, #E879C8, #D946A8)' }}>
@@ -16,17 +26,9 @@ export default function OffersTicker({ products }) {
           <span className="text-white text-sm font-bold uppercase tracking-wider whitespace-nowrap">Ofertas</span>
         </div>
         <div className="overflow-hidden flex-1">
-          <div className="animate-marquee flex items-center whitespace-nowrap py-3">
-            {items.map((p, i) => (
-              <span key={`${p.id}-${i}`} className="inline-flex items-center gap-4 mx-8">
-                <img src={p.imagenes?.[0] || p.imagen} alt="" className="w-14 h-14 rounded-xl object-cover border-2 border-white/40 shadow-lg flex-shrink-0" />
-                <div className="flex flex-col">
-                  <span className="text-white text-base font-bold leading-tight">{p.nombre}</span>
-                  <span className="text-white/80 text-sm font-bold">${p.precio.toLocaleString('es-AR')}</span>
-                </div>
-                <span className="text-white/30 text-2xl mx-3">•</span>
-              </span>
-            ))}
+          <div className="marquee-track flex items-center whitespace-nowrap py-3">
+            <div className="marquee-content flex items-center flex-shrink-0">{renderItems('a')}</div>
+            <div className="marquee-content flex items-center flex-shrink-0">{renderItems('b')}</div>
           </div>
         </div>
       </div>
